@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Adivinanza Complejo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Juego de Adivinanza Complejo</h1>
+  <p>Elige un nivel de dificultad:</p>
+  <select id="nivel" onchange="seleccionarNivel()">
+    <option value="1">Fácil (1-50)</option>
+    <option value="2">Moderado (1-100)</option>
+    <option value="3">Difícil (1-200)</option>
+  </select>
+  <br><br>
+  <p>Intenta adivinar el número secreto:</p>
+  <input type="number" id="numeroUsuario">
+  <button onclick="adivinarNumero()">Adivinar</button>
+  <p id="resultado"></p>
+
+  <script>
+    let numeroMaximo;
+    let numeroAleatorio;
+    let intentos = 0;
+    const intentosMaximos = 10;
+
+    function seleccionarNivel() {
+      const nivel = document.getElementById('nivel').value;
+
+      switch (nivel) {
+        case '1':
+          numeroMaximo = 50;
+          break;
+        case '2':
+          numeroMaximo = 100;
+          break;
+        case '3':
+          numeroMaximo = 200;
+          break;
+        default:
+          numeroMaximo = 50;
+      }
+
+      reiniciarJuego();
+    }
+
+    function reiniciarJuego() {
+      numeroAleatorio = generarNumeroAleatorio(numeroMaximo);
+      intentos = 0;
+      document.getElementById('numeroUsuario').value = '';
+      document.getElementById('resultado').innerHTML = '';
+      habilitarJuego();
+    }
+
+    function habilitarJuego() {
+      document.getElementById('numeroUsuario').disabled = false;
+      document.getElementById('numeroUsuario').removeAttribute('readonly');
+      document.getElementById('numeroUsuario').style.backgroundColor = '#fff';
+      document.getElementById('numeroUsuario').style.cursor = 'auto';
+      document.querySelector('button').disabled = false;
+    }
+
+    function generarNumeroAleatorio(max) {
+      return Math.floor(Math.random() * max) + 1;
+    }
+
+    function adivinarNumero() {
+      const numeroUsuario = parseInt(document.getElementById('numeroUsuario').value);
+
+      if (isNaN(numeroUsuario) || numeroUsuario <= 0 || numeroUsuario > numeroMaximo) {
+        document.getElementById('resultado').innerHTML = 'Ingresa un número válido.';
+        return;
+      }
+
+      intentos++;
+
+      if (numeroUsuario === numeroAleatorio) {
+        document.getElementById('resultado').innerHTML = `¡Correcto! ¡Has adivinado el número en ${intentos} intentos!`;
+        desactivarJuego();
+      } else {
+        let mensaje = `Incorrecto. Intento ${intentos}.`;
+
+        if (numeroUsuario > numeroAleatorio) {
+          mensaje += ' El número es menor.';
+        } else {
+          mensaje += ' El número es mayor.';
+        }
+
+        if (intentos === intentosMaximos) {
+          mensaje += `<br>¡Agotaste tus ${intentosMaximos} intentos! El número era ${numeroAleatorio}.`;
+          desactivarJuego();
+        }
+
+        if (numeroAleatorio % 2 === 0) {
+          mensaje += ' Además, el número es par.';
+        } else {
+          mensaje += ' Además, el número es impar.';
+        }
+
+        document.getElementById('resultado').innerHTML = mensaje;
+      }
+    }
+
+    function desactivarJuego() {
+      document.getElementById('numeroUsuario').disabled = true;
+      document.getElementById('numeroUsuario').setAttribute('readonly', 'readonly');
+      document.getElementById('numeroUsuario').style.backgroundColor = '#ccc';
+      document.getElementById('numeroUsuario').style.cursor = 'not-allowed';
+      document.querySelector('button').disabled = true;
+    }
+
+    // Iniciar con el nivel predeterminado
+    seleccionarNivel();
+  </script>
+
+</body>
+</html>

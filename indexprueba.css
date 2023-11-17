@@ -1,0 +1,117 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    background-color: #57442B;
+  }
+  
+  .header {
+    text-align: left;
+    font-size: x-large;
+    padding: 10px;
+    background-color: #A38051;
+  }
+  
+  .topnav {
+    overflow: hidden;
+    background-color: #A38051;
+  }
+  
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .topnav a:hover {
+    background-color: #A38051;
+    color: black;
+  }
+  
+  .datos-foto-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .datos {
+    text-align: center;
+    font-size: larger;
+    border: 1px solid black;
+    width: 48%;
+    background-color: #A38051;
+    box-shadow: 10px 10px;
+  }
+  
+  .datos ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .foto {
+    width: 48%;
+  }
+  
+  .foto-img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  #formularioContacto {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #A38051;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #57442B;
+  }
+  
+  .footer {
+    border-radius: 0 40px 0 0;
+    background: #F0DABD;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px; /* Ajusta según tus preferencias */
+  }
+  
+  @media (max-width: 768px) {
+    .datos-foto-container {
+      flex-direction: column;
+    }
+  
+    .datos, .foto {
+      width: 100%;
+    }
+  }
+  
