@@ -1,0 +1,1 @@
+el archivo prueba.html es un juego de adivinanzas basado en JS.
